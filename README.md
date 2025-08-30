@@ -8,13 +8,10 @@ This is an early development version (0.1.0) and may contain bugs or unexpected 
 
 ## Usage
 
-Insert this code into your <head> section:
+Insert this code into your head section:
 
 ```js
-<script
-  src="https://dr8off.github.io/Aria-Tree-Inspector/index.js"
-  defer
-></script>
+<script src="https://dr8off.github.io/Aria-Tree-Inspector/index.js" defer></script>
 ```
 
 The accessibility score and detailed analysis will be available in your browser's console.
