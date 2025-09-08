@@ -2,7 +2,7 @@
 // This software is free to use and modify under the MIT License.
 // Please note that this is not the final version, so it may contain bugs and issues
 
-function GetAllAccessibilityRequiredElements() {
+function getAllAccessibilityRequiredElements() {
   const buttons = document.querySelectorAll("button");
   const inputs = document.querySelectorAll('input:not([type="hidden"])');
   const textareas = document.querySelectorAll("textarea");
@@ -32,7 +32,7 @@ function GetAllAccessibilityRequiredElements() {
   };
 }
 
-const totalElements = GetAllAccessibilityRequiredElements();
+const totalElements = getAllAccessibilityRequiredElements();
 
 const ariaValidationRules = {
   img: (element) => {
@@ -105,19 +105,19 @@ const ariaValidationRules = {
   },
 };
 
-function IsElementHasRequiredAriaAttribute(element, elementType) {
+function isElementHasRequiredAriaAttribute(element, elementType) {
   const validator = ariaValidationRules[elementType];
   return validator(element);
 }
 
-function InspectAllElementsForAriaAttributes() {
+function inspectAllElementsForAriaAttributes() {
   const elementsWithoutRequiredAria = [];
 
   for (const key in totalElements.allElements) {
     const group = totalElements.allElements[key];
 
     group.forEach((element) => {
-      if (!IsElementHasRequiredAriaAttribute(element, key)) {
+      if (!isElementHasRequiredAriaAttribute(element, key)) {
         elementsWithoutRequiredAria.push(element);
       }
     });
@@ -126,9 +126,9 @@ function InspectAllElementsForAriaAttributes() {
   return elementsWithoutRequiredAria;
 }
 
-const elementsWithoutRequiredAria = InspectAllElementsForAriaAttributes();
+const elementsWithoutRequiredAria = inspectAllElementsForAriaAttributes();
 
-function GetFinalScoreAsLetter(percent) {
+function getFinalScoreAsLetter(percent) {
   if (percent <= 65) {
     return '"F" - Very bad';
   } else if (percent <= 75) {
@@ -142,7 +142,7 @@ function GetFinalScoreAsLetter(percent) {
   }
 }
 
-function LogFinalAriaScore() {
+function logFinalAriaScore() {
   const elementsWithMissingAriaCount = elementsWithoutRequiredAria.length;
 
   const totalScore = Math.ceil(
@@ -157,7 +157,7 @@ function LogFinalAriaScore() {
     Aria Tree Inspector 0.1.0 by DR8 | GitHub - https://github.com/DR8off
 
     Total score - ${totalScore}%
-    ${GetFinalScoreAsLetter(totalScore)}
+    ${getFinalScoreAsLetter(totalScore)}
 
     Total elements checked: ${totalElements.count}
     Elements with missing attributes: ${elementsWithMissingAriaCount}
@@ -174,4 +174,4 @@ function LogFinalAriaScore() {
   `);
 }
 
-LogFinalAriaScore();
+logFinalAriaScore();
